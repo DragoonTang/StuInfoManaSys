@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "学生管理";
+}
+@model List<StudentViewModel>
+
+<div>
+    <a asp-action="Add" class="button is-primary mb-4">添加学生</a>
+    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>专业</th>
+                <th>年级</th>
+                <th>班级</th>
+                <th>性别</th>
+                <th>生日</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>@student.Number</td>
+                    <td>@student.Name</td>
+                    <td>@student.MajorName</td>
+                    <td>@student.GradeName</td>
+                    <td>@student.ClassName</td>
+                    <td>@(student.Gender ? "女" : "男")</td>
+                    <td>@student.Birthday.ToString("yyyy年MM月dd日")</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@student.Id" class="button is-warning">编辑</a>
+                        <button class="button is-danger" onclick="Delete('@student.Id')">删除</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+    <script>
+        function Delete(id){
+               DeleteWithController(id,'Student');
+        //        Swal.fire({
+        //            title:"是否确定删除？",
+        //            text:"此操作不可撤销!",
+        //            icon:"warning",
+        //            showCancelButton:true,
+        //            confirmButtonText: "是",
+        //            cancelButtonText: "否",
+        //            animation: false
+        //        }).then(result =>{
+        //                if(result.isConfirmed) {
+        //                    fetch('/Student/Delete/' + id).then(response =>{
+        //                        if(response.ok){
+        //                            return response.text().then(text=>{
+        //                                Swal.fire({
+        //                                    title:text,
+        //                                    icon: "success"
+        //                                }).then(()=>location.reload());
+        //                            });
+        //                        }else{
+        //                            return response.text().then(
+        //                                text=>{
+        //                                    Swal.fire({
+        //                                        title:"删除失败",
+        //                                        text:text,
+        //                                        icon:"error"
+        //                                    });
+        //                                });
+        //                        }
+        //                    });
+        //                }
+        //    });
+        }
+    </script>
+}

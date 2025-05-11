@@ -1,0 +1,47 @@
+﻿@inject SignInManager<IdentityUser> signInManager
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    @*     <a href="~/bulma/bulma.css.map">~/bulma/bulma.css.map</a> *@
+    <script src="~/sweetalert2.all.js"></script>
+    <script src="~/htmx.js"></script>
+    <script src="~/main.js"></script>
+</head>
+<body>
+    <nav class="navbar is-info p-2">
+        <div class="navbar-brand">
+            <a asp-controller="Home" asp-action="Index" class="navbar-item">
+                <p class="title">学生信息管理系统</p>
+            </a>
+        </div>
+
+        <div class="navbar-menu">
+            @if (User.IsInRole(UserRole.Admin.ToString()))
+            {
+                <div class="navbar-start">
+                    <a asp-controller="User" asp-action="Index" class="navbar-item">用户管理</a>
+                    <a asp-controller="Role" asp-action="Index" class="navbar-item">角色管理</a>
+                    <a asp-controller="Major" asp-action="Index" class="navbar-item">专业管理</a>
+                    <a asp-controller="Grade" asp-action="Index" class="navbar-item">年级管理</a>
+                    <a asp-controller="Class" asp-action="Index" class="navbar-item">班级管理</a>
+                    <a asp-controller="Student" asp-action="Index" class="navbar-item">学生管理</a>
+                </div>
+            }
+            @if (signInManager.IsSignedIn(User))
+            {
+                <div class="navbar-end">
+                    <a asp-controller="Account" asp-action="Logout" class="navbar-item">注销</a>
+                </div>
+            }
+        </div>
+    </nav>
+    <div class="p-6">
+        @RenderBody()
+    </div>
+    @await RenderSectionAsync("scripts", false)
+</body>
+</html>

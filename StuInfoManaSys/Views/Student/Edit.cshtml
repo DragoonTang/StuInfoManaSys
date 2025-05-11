@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "编辑学生";
+}
+@model StudentViewModel
+
+<form method="post" class="mx-auto" style="width:320px;">
+    <div asp-validation-summary="All" class="has-text-danger mb-4"></div>
+    <input asp-for="Id" hidden />
+    <div class="field">
+        <label asp-for="MajorName" class="label"></label>
+        <div class="control">
+            <div class="select is-fullwidth">
+                <select asp-for="MajorId" asp-items="Model.Majors"
+                        hx-get="/Student/GetClassSelectPartial"
+                        hx-target="#ClassId"
+                        hx-include="#GradeId,#ClassId"
+                        hx-swap="outerHTML">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label asp-for="GradeName" class="label"></label>
+        <div class="control">
+            <div class="select is-fullwidth">
+                <select asp-for="GradeId" asp-items="Model.Grades"
+                        hx-get="/Student/GetClassSelectPartial"
+                        hx-target="#ClassId"
+                        hx-include="#MajorId,#ClassId"
+                        hx-swap="outerHTML">
+                    <option value="">请选择</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label asp-for="ClassName" class="label"></label>
+        <div class="control">
+            <div class="select is-fullwidth">
+                <input asp-for="ClassId" hx-get="/Student/GetClassSelectPartial"
+                       hx-trigger="load"
+                       hx-include="#MajorId,#GradeId"
+                       hx-swap="outerHTML">
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <label asp-for="Number" class="label"></label>
+        <div class="control">
+            <input asp-for="Number" class="input" />
+        </div>
+    </div>
+    <div class="field">
+        <label asp-for="Name" class="label"></label>
+        <div class="control">
+            <input asp-for="Name" class="input" />
+        </div>
+    </div>
+    <div class="field">
+        <label asp-for="Birthday" class="label"></label>
+        <div class="control">
+            <input asp-for="Birthday" class="input" />
+        </div>
+    </div>
+    <div class="field">
+        <label asp-for="Gender" class="label"></label>
+        <div class="control">
+            <label class="radio">
+                <input type="radio" asp-for="Gender" value="true" />
+                女
+            </label>
+        </div>
+    </div>
+    <div class="field">
+        <button class="button is-primary is-fullwidth">提交</button>
+    </div>
+</form>

@@ -1,0 +1,117 @@
+﻿@model SearchViewModel
+@{
+    ViewData["Title"] = "主页";
+}
+
+<form method="post">
+    <div class="field is-grouped">
+        <div class="field has-addons">
+            <div class="control">
+                <a class="button is-static">专业</a>
+            </div>
+            <div class="control">
+                <div class="select">
+                    <select asp-for=MajorId asp-items=Model.Majors
+                            hx-get="/Student/GetClassSelectPartial"
+                            hx-target="#ClassId"
+                            hx-include="#GradeId,#ClassId"
+                            hx-swap="outerHTML">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field has-addons">
+            <div class="control">
+                <a class="button is-static">年级</a>
+            </div>
+            <div class="control">
+                <div class="select">
+                    <select asp-for=GradeId asp-items=Model.Grades
+                            hx-get="/Student/GetClassSelectPartial"
+                            hx-target="#ClassId"
+                            hx-include="#MajorId,#ClassId"
+                            hx-swap="outerHTML">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field has-addons">
+            <div class="control">
+                <a class="button is-static">班级</a>
+            </div>
+            <div class="control">
+                <div class="select">
+                    <input asp-for=ClassId
+                           hx-get="/Student/GetClassSelectPartial"
+                           hx-trigger="load"
+                           hx-include="#MajorId,#GradeId"
+                           hx-swap="outerHTML">
+                </div>
+            </div>
+        </div>
+        <div class="field has-addons">
+            <div class="control">
+                <a class="button is-static">性别</a>
+            </div>
+            <div class="control">
+                <div class="select">
+                    <select asp-for=Gender>
+                        <option value="">请选择</option>
+                        <option value="false">男</option>
+                        <option value="true">女</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field has-addons">
+            <div class="control">
+                <a class="button is-static">姓名</a>
+            </div>
+            <div class="control">
+                <input asp-for="Name" class="input" />
+            </div>
+        </div>
+        <div class="field has-addons">
+            <div class="control">
+                <a class="button is-static">学号</a>
+            </div>
+            <div class="control">
+                <input asp-for="Number" class="input" />
+            </div>
+        </div>
+        <div class="field">
+            <button class="button is-primary">查询</button>
+        </div>
+    </div>
+</form>
+
+<table class="table is-bordered is-striped is-hoverable is-fullwidth">
+    <thead>
+        <tr>
+            <th>学号</th>
+            <th>姓名</th>
+            <th>专业</th>
+            <th>年级</th>
+            <th>班级</th>
+            <th>性别</th>
+            <th>生日</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var result in Model.Results)
+        {
+            <tr>
+                <td>@result.Number</td>
+                <td>@result.Name</td>
+                <td>@result.MajorName</td>
+                <td>@result.GradeName</td>
+                <td>@result.ClassName</td>
+                <td>@(result.Gender ? "女" : "男")</td>
+                <td>@result.Birthday.ToString("yyyy年MM月dd日")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+你好世界!

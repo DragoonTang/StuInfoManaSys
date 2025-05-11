@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "修改专业";
+}
+@model MajorViewModel
+
+<form method="post" class="mx-auto" style="width:320px;">
+    <input asp-for="Id" hidden />
+    <div asp-validation-summary="All" class="has-text-danger mb-5"></div>
+    <div class="field">
+        <label asp-for="Name" class="label"></label>
+        <div class="control">
+            <input asp-for="Name" class="input">
+        </div>
+    </div>
+    <div class="field">
+        <button class="button is-primary is-fullwidth">提交</button>
+    </div>
+</form>
+

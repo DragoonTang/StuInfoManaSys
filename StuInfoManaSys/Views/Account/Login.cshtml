@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "登录";
+}
+@model LoginViewModel
+
+<form method="post" style="width:480px;" class="box mx-auto my-6">
+    <div asp-validation-summary="All" class="has-text-danger mb-4"></div>
+    <div class="field">
+        <div class="control">
+            <input asp-for=UserName class="input" />
+        </div>
+    </div>
+    <div class="field">
+        <label asp-for="Password" class="label"></label>
+        <div class="control">
+            <input asp-for=Password class="input" />
+        </div>
+    </div>
+    <button class="button is-primary">登录</button>
+</form>

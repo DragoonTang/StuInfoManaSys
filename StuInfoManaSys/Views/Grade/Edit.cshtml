@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "编辑年级";
+}
+    @model GradeViewModel
+<form method="post" class="mx-auto" style="width:320px;">
+    <div asp-validation-summary="All" class="has-text-danger mb-4"></div>
+    <input asp-for="Id" hidden />
+    <div class="field">
+        <label asp-for="Name" class="label"></label>
+        <div class="control">
+            <input asp-for="Name" class="input" />
+        </div>
+    </div>
+    <div class="field">
+        <button class="button is-primary is-fullwidth">提交</button>
+    </div>
+</form>

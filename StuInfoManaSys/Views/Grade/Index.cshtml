@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "年级管理";
+}
+@model List<GradeViewModel>
+
+<a asp-action="Add" class="button is-primary mb-4">添加年级</a>
+<table class="table is-bordered is-striped is-hoverable is-fullwidth">
+    <thead>
+        <tr>
+            <th>年级</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var grade in Model)
+        {
+            <tr>
+                <td>@grade.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@grade.Id" class="button is-warning">编辑</a>
+                    <button class="button is-danger" onclick="Delete('@grade.Id')">删除</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        function Delete(id){
+            DeleteWithController(id,'Grade');
+        }
+    </script>
+}
